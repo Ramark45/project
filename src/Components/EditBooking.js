@@ -1,51 +1,59 @@
-import "../App.css";
 import axios from "axios";
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import cameraman from './cameraman.jpg'
- const Booking=()=>{
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
+
+export default function EditBooking() {
   let navigate = useNavigate();
+
+  const {id}=useParams();
 
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
     address: "",
+    mobile:"",
     city:"",
     type:"",
-    mobile:"",
     date:"",
-    info:"Pending"
+    info:""
   });
 
-  const { firstName, lastName, address,type,mobile,date ,city,info} = user;
+  const { firstName, lastName, address,mobile,city,type,date,info } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+  useEffect(()=>{
+    loadUser();
+  },[])
+
   const onSubmit = async (e) => {
-   e.preventDefault();
-    await axios.post("http://localhost:8080/api/test/booking", user);
-    alert("Appointment Submitted Successfully")
-    navigate("/")
+    e.preventDefault();
+    await axios.put(`http://localhost:8080/api/test/booking/${id}`, user).then((response)=>{
+        setUser(response.data);
+        alert("Appointment accepted")
+    navigate("/");
+        console.log(response);
+    })
+    
   };
-    return(
-        <><form onSubmit={(e) => onSubmit(e)}>
-<section className="h-100 bg-dark" >
-  <div className="container py-5 h-100" style={{"backgroundColor":"white"}}>
-    <div className="row d-flex justify-content-center align-items-center h-100">
-      <div className="col">
+
+  const loadUser=async()=>{
+   await axios.get(`http://localhost:8080/api/test/booking/${id}`).then((response)=>{
+        setUser(response.data);
+        console.log(response);
+    })
+  }
+
+  return (
+    <><form onSubmit={(e) => onSubmit(e)}>
         <div className="card card-registration my-4">
           <div className="row g-0">
-            <div className="col-xl-6 d-none d-xl-block">
-              <img src={cameraman}
-                className="img-fluid"
-                style={{"border-top-left-radius": ".25rem","border-bottom-left-radius": ".25rem","height":"540px","width":"500px"}} />
-            </div>
             
             <div className="col-xl-6">
               <div className="card-body p-md-5 text-black">
-                <h3 className="mb-5 text-uppercase" style={{"fontFamily":"times new roman","color":"red","fontWeight":"bold"}}>Book an Appointment</h3>
+                <h3 className="mb-5 text-uppercase">Update an Appointment</h3>
 
                 <div className="row">
                   <div className="col-md-6 mb-4">
@@ -98,23 +106,24 @@ import cameraman from './cameraman.jpg'
                   <input type="date" name="date" value={date} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Date of Birth" />
                 </div>
 
-                <div className="form-outline mb-4" style={{"display":"none"}}>
-                  <input type="text-area" id="form3Example97" name="info" value={info} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Additinal Information if Any"/>
+                <div className="form-outline mb-4">
+                <select className="form-select" name="info" value={info} onChange={(e) => onInputChange(e)}>
+                      <option value="Pending">Pending</option>
+                      <option value="Approved">Approve</option>
+                      <option value="Declined">Decline</option>
+                    </select>
+                  {/* <input type="text-area" id="form3Example97" name="info" value={info} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Additinal Information if Any"/> */}
                 </div>
                 
                 <div className="d-flex justify-content-end pt-3">
                   {/* <button type="button" class="btn btn-light btn-lg">Reset all</button> */}
-                  <button type="submit" class="btn btn-warning btn-lg ms-2">Submit form</button>
+                  <button type="submit" class="btn btn-warning btn-lg ms-2">Update Status</button>
                 </div>
 
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section></form></>
-    );
+      </form></>
+  );
 }
-export default Booking;

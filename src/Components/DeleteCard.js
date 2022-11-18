@@ -31,7 +31,7 @@ const DeleteCard = () => {
    })}
    const deleteUser=async(id)=>{
     axios.delete("http://localhost:8080/api/test/image"+'/'+id).then((response)=>{
-    alert("Appointment Declined Succesfully");
+    alert("Post Deleted Succesfully");
     setUsers(response.data);
     window.location.reload();
     AllUsers();
@@ -62,7 +62,7 @@ const DeleteCard = () => {
   return (
       <>
       <h3 style={{"fontFamily":"times new roman","textAlign":"center","color":"#24a4d8","fontWeight":"bold"}}>
-        MY PHOTO SHOOTS
+        MANAGE YOUR HOME GALLERY
       </h3>
       <div className="row row-cols-1 row-cols-md-3 g-4">
   {

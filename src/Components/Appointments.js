@@ -9,30 +9,21 @@ export default function Appointments() {
         lastName : "",
         address:"",
         mobile:"",
-        type:""
+        type:"",
+        info:"",
+        city:"",
+        date:""
       }
     ]);
-    const [status,setStatus]=useState([
-      {
-        status:"1"
-      }
-    ])
     useEffect(() => {
       AllUsers();
-      updateStatus();
+
     }, []);
-    const updateStatus = async () => {
-      // e.preventDefault();
-       await axios.put("http://localhost:8080/api/test/booking/status", users);
-       alert("Appointment Accepted")
-       navigate("/appointments")
-     };
 
     const {id}=useParams();
     
-
     const AllUsers = async () => {
-      axios.get('http://localhost:8080/api/test/booking/allbookings').then((response)=>{
+      axios.get('http://localhost:8080/api/test/booking').then((response)=>{
          setUsers(response.data);
          console.log(response);
      })}
@@ -58,6 +49,7 @@ export default function Appointments() {
       <th scope="col">ADDRESS</th>
       <th scope="col">SHOOT TYPE</th>
       <th scope="col">MOBILE</th>
+      <th scope="col">STATUS</th>
       <th scope="col">APPOINTMENTS</th>
     </tr>
   </thead>
@@ -70,10 +62,14 @@ export default function Appointments() {
                 <td>{user.address}</td>
                 <td>{user.type}</td>
                 <td>{user.mobile}</td>
+                <td>{user.info}</td>
                 <td>
         {/* <Link className='btn btn-success mx-2' to={`/${user.id}`}>Accept</Link> */}
-        <button className='btn btn-success mx-2' onClick={()=>updateStatus()}>Accept</button>
-        <button className='btn btn-danger mx-2' onClick={()=>deleteUser(user.id)}>Decline</button>
+        {/* <button className='btn btn-success mx-2'>Accept</button> */}
+        {/* <button className='btn btn-primary mx-2' onClick={()=>navigateToViewAppointment(user)}>View</button> */}
+        {/* <Link className='btn btn-outline-primary mx-2' to={`/navigateToViewAppointment/${user}`}>Edit</Link> */}
+        <Link className='btn btn-outline-success mx-2' to={`/editBooking/${user.id}`}>Update</Link>
+        <button className='btn btn-danger mx-2' onClick={()=>deleteUser(user.id)}>Delete</button>
       </td>
               </tr>
             )})}

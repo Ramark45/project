@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Footer from "./Components/Footer";
+import ViewAppointment from "./Components/ViewAppointment"
 import logo from './Components/logo.png'
 import Booking from "./Components/Booking";
+import EditBooking from "./Components/EditBooking"
 import AuthService from "./Services/auth-service";
 import Appointments from "./Components/Appointments";
 import Login from "./Components/Login";
@@ -124,9 +127,12 @@ const App = () => {
           <Route path="/profile" element={<Profile/>} />
           <Route path="/admin" element={<AdminBoard/>} />
           <Route path="/Appointments" element={<Appointments/>}></Route>
+          <Route path="/editBooking/:id" element={<EditBooking/>}></Route>
+          {/* <Route path="/ViewAppointment/:id" element={<ViewAppointment/>}></Route> */}
           <Route path="/deletecard" element={<DeleteCard/>}></Route>
         </Routes>
       </div>
+      <Footer />
     </div>
   );
 };
