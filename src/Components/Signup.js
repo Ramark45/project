@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import avatar from './avatar.png'
 const Signup = () => {
   let navigate = useNavigate();
   const [user, setUser] = useState({
@@ -24,10 +25,10 @@ const Signup = () => {
    };
 
   return (
-    <div className="col-md-12">
-      <div className="card card-container">
+    <div className="col-md-12" style={{"margin-top":" -20px"}}>
+      <div className="card card-container" style={{"border":"2px solid #24a4d8","borderRadius":"5px","height":"440px"}}>
         <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          src={avatar}
           alt="profile-img"
           className="profile-img-card"
         />
@@ -66,12 +67,12 @@ const Signup = () => {
               onChange={(e) =>onInputChange(e)}
                           />
           </div>
-
+<br></br>
           <div className="form-group">
             <button className="btn btn-primary btn-block">
               
               <span>Signup</span>
-            </button>
+            </button><br></br>
           </div>
 
           {/* {message && (

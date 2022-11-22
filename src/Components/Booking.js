@@ -2,22 +2,41 @@ import "../App.css";
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import cameraman from './cameraman.jpg'
+import cameraman from './cameraman.jpg';
+import AuthService from "../Services/auth-service";
  const Booking=()=>{
+  const pastdate=new Date();
+  var tdate;
+  var tmonth;
+  var tyear=pastdate.getFullYear();
+  if(pastdate.getDate()<10){
+    tdate="0"+pastdate.getDate()
+  }
+  else{
+    tdate=pastdate.getDate()
+  }
+  if(pastdate.getMonth()<10){
+    tmonth="0"+(pastdate.getMonth()+1)
+  }
+  else{
+    tmonth=pastdate.getMonth()+1
+  }
+  const currdate=tyear+"-"+tmonth+"-"+tdate
+  const currentUser = AuthService.getCurrentUser();
   let navigate = useNavigate();
-
   const [user, setUser] = useState({
-    firstName: "",
+    firstName: currentUser.username,
     lastName: "",
     address: "",
     city:"",
     type:"",
     mobile:"",
     date:"",
-    info:"Pending"
+    info:"Pending",
+    amount:"0"
   });
-
-  const { firstName, lastName, address,type,mobile,date ,city,info} = user;
+  
+  const { firstName, lastName, address,type,mobile,date ,city,info,amount} = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -50,7 +69,7 @@ import cameraman from './cameraman.jpg'
                 <div className="row">
                   <div className="col-md-6 mb-4">
                     <div className="form-outline">
-                      <input type="text" name="firstName" value={firstName} onChange={(e) => onInputChange(e)} id="form3Example1m" class="form-control form-control-lg" placeholder="First name" />
+                      <input type="text" name="firstName" value={firstName}  id="form3Example1m" class="form-control form-control-lg" placeholder="First name" />
             
                     </div>
                   </div>
@@ -95,11 +114,14 @@ import cameraman from './cameraman.jpg'
                 </div>
 
                 <div className="form-outline mb-4">
-                  <input type="date" name="date" value={date} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Date of Birth" />
+                  <input type="date" name="date" min={currdate} value={date} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Date of Birth" />
                 </div>
 
                 <div className="form-outline mb-4" style={{"display":"none"}}>
-                  <input type="text-area" id="form3Example97" name="info" value={info} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Additinal Information if Any"/>
+                  <input type="text-area" id="form3Example97" name="info" value={info} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Status"/>
+                </div>
+                <div className="form-outline mb-4" style={{"display":"none"}}>
+                  <input type="text-area" id="form3Example97" name="amount" value={amount} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Amount"/>
                 </div>
                 
                 <div className="d-flex justify-content-end pt-3">

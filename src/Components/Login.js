@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 // import Form from "react-validation/build/form";
 // import Input from "react-validation/build/input";
 // import CheckButton from "react-validation/build/button";
-
+import avatar from './avatar.png'
 import AuthService from "../Services/auth-service";
 
 // const required = (value) => {
@@ -70,9 +70,10 @@ const Login = () => {
 
   return (
     <div className="col-md-12">
-      <div className="card card-container">
+      <div className="card card-container" style={{"border":"2px solid #24a4d8","borderRadius":"5px"}}>
         <img
-          src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          // src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
+          src={avatar}
           alt="profile-img"
           className="profile-img-card"
         />
@@ -100,7 +101,7 @@ const Login = () => {
               onChange={onChangePassword}
                           />
           </div>
-
+<br></br>
           <div className="form-group">
             <button className="btn btn-primary btn-block">
               

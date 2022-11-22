@@ -3,7 +3,6 @@ import { Routes, Route, Link } from "react-router-dom";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Footer from "./Components/Footer";
-import ViewAppointment from "./Components/ViewAppointment"
 import logo from './Components/logo.png'
 import Booking from "./Components/Booking";
 import EditBooking from "./Components/EditBooking"
@@ -18,7 +17,9 @@ import BoardUser from "./Components/BoardUser";
 import AdminBoard from "./Components/AdminBoard";
 import DeleteCard from "./Components/DeleteCard";
 import Signup from "./Components/Signup";
-import Status from "./Components/Status";
+import Payment from "./Components/Payment";
+import Protected from "./Components/Protected";
+import homeicon from './Components/homeicon.jpg'
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -44,9 +45,13 @@ const App = () => {
       <nav className="navbar navbar-expand navbar-dark" style={{"backgroundColor":"#24a4d8","height":"70px"}}>
         <img src={logo} style={{"height":"70px","width":"120px","paddingLeft":"10px"}}/>
         <div className="navbar-nav mr-auto">
+        
           <li className="nav-item" >
             <Link to={"/home"} className="nav-link">
-              HOME
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+  <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5Z"/>
+  <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6Z"/>
+</svg>
             </Link>
           </li>
           {showAdminBoard && (
@@ -78,7 +83,7 @@ const App = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link to={"/status"} className="nav-link">
+              <Link to={"/profile"} className="nav-link">
                 CHECK STATUS
               </Link>
             </li>
@@ -88,16 +93,16 @@ const App = () => {
           
         {currentUser ? (
           <div className="navbar-nav ml-auto">
-            {/* <li className="nav-item">
-              <Link to={"/profile"} className="nav-link" style={{"textTransform":"uppercase"}}>
-                {currentUser.username}
-              </Link>
-            </li> */}
+            
             <li className="nav-item">
               <a href="/login" className="nav-link" onClick={logOut}>
-                LOGOUT
+              LOGOUT <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+  <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+</svg>
               </a>
             </li>
+
           </div>
         
         ) : (
@@ -121,14 +126,14 @@ const App = () => {
           <Route path="/" element={<Home/>} />
           <Route path="/home" element={<Home/>} />
           <Route path="/booking" element={<Booking/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/signup" element={<Signup/>} />
-          <Route path="/status" element={<Status/>} />
+          <Route path="/login" element={<Protected Component={Login}/>} />
+          <Route path="/signup" element={<Protected Component={Signup}/>} />
+          <Route path="/profile" element={<Profile/>} />
+          <Route path="/payment" element={<Payment/>} />
           <Route path="/profile" element={<Profile/>} />
           <Route path="/admin" element={<AdminBoard/>} />
           <Route path="/Appointments" element={<Appointments/>}></Route>
           <Route path="/editBooking/:id" element={<EditBooking/>}></Route>
-          {/* <Route path="/ViewAppointment/:id" element={<ViewAppointment/>}></Route> */}
           <Route path="/deletecard" element={<DeleteCard/>}></Route>
         </Routes>
       </div>

@@ -65,16 +65,16 @@ const AdminBoard = () => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="container" >
       <header className="jumbotron">
         {/* <h3>{content}</h3> */}
       </header>
 
-      <div className="row">
+      <div className="row" >
         <div className="col-md-6 offset-md-3 border rounded p-4 mt-2 shadow">
           <h2 className="text-center m-4">Add Images</h2>
 
-          <form onSubmit={(e) => onSubmit(e)}>
+          <form onSubmit={(e) => onSubmit(e)} >
             <div className="mb-3">
               <label htmlFor="FirstName" className="form-label">
                 Title

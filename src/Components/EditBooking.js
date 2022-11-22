@@ -15,10 +15,11 @@ export default function EditBooking() {
     city:"",
     type:"",
     date:"",
-    info:""
+    info:"",
+    amount:""
   });
 
-  const { firstName, lastName, address,mobile,city,type,date,info } = user;
+  const { firstName, lastName, address,mobile,city,type,date,info,amount } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -32,7 +33,7 @@ export default function EditBooking() {
     e.preventDefault();
     await axios.put(`http://localhost:8080/api/test/booking/${id}`, user).then((response)=>{
         setUser(response.data);
-        alert("Appointment accepted")
+        alert("Appointment Updated")
     navigate("/");
         console.log(response);
     })
@@ -105,7 +106,9 @@ export default function EditBooking() {
                 <div className="form-outline mb-4">
                   <input type="date" name="date" value={date} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Date of Birth" />
                 </div>
-
+                <div className="form-outline mb-4">
+                  <input type="text" id="form3Example9" name="amount" value={amount} onChange={(e) => onInputChange(e)} class="form-control form-control-lg" placeholder="Bill Amount"/>
+                </div>
                 <div className="form-outline mb-4">
                 <select className="form-select" name="info" value={info} onChange={(e) => onInputChange(e)}>
                       <option value="Pending">Pending</option>

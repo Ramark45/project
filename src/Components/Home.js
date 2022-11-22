@@ -10,6 +10,7 @@ import nature2 from '../Components/nature2.jpg';
 import nature3 from '../Components/nature3.jpg';
 import {useNavigate } from "react-router-dom";
 const Home = () => {
+  
   const [users,setUsers]=useState([
     {
       name:"",

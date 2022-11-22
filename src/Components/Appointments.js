@@ -12,7 +12,8 @@ export default function Appointments() {
         type:"",
         info:"",
         city:"",
-        date:""
+        date:"",
+        amount:""
       }
     ]);
     useEffect(() => {
@@ -23,14 +24,14 @@ export default function Appointments() {
     const {id}=useParams();
     
     const AllUsers = async () => {
-      axios.get('http://localhost:8080/api/test/booking').then((response)=>{
+      axios.get(`http://localhost:8080/api/test/booking`).then((response)=>{
          setUsers(response.data);
          console.log(response);
      })}
   
      const deleteUser=async(id)=>{
         axios.delete(`http://localhost:8080/api/test/booking/${id}`).then((response)=>{
-        alert("Appointment Declined Succesfully");
+        alert("Appointment Deleted Succesfully");
         setUsers(response.data);
         window.location.reload();
         AllUsers();
@@ -40,12 +41,11 @@ export default function Appointments() {
     return (
         <div className='container'>
             <div className='py-4'>
-            <table className="table border shadow">
-  <thead>
+            <table className="table border shadow table table-striped">
+  <thead style={{"backgroundColor":"#24a4d8"}}>
     <tr>
       <th scope="col">ID</th>
       <th scope="col">FIRST NAME</th>
-      <th scope="col">LAST NAME</th>
       <th scope="col">ADDRESS</th>
       <th scope="col">SHOOT TYPE</th>
       <th scope="col">MOBILE</th>
@@ -58,16 +58,11 @@ export default function Appointments() {
     return( <tr>
                 <th scope="row" key={index}>{index+1}</th>
                 <td>{user.firstName}</td>
-                <td>{user.lastName}</td>
                 <td>{user.address}</td>
                 <td>{user.type}</td>
                 <td>{user.mobile}</td>
                 <td>{user.info}</td>
                 <td>
-        {/* <Link className='btn btn-success mx-2' to={`/${user.id}`}>Accept</Link> */}
-        {/* <button className='btn btn-success mx-2'>Accept</button> */}
-        {/* <button className='btn btn-primary mx-2' onClick={()=>navigateToViewAppointment(user)}>View</button> */}
-        {/* <Link className='btn btn-outline-primary mx-2' to={`/navigateToViewAppointment/${user}`}>Edit</Link> */}
         <Link className='btn btn-outline-success mx-2' to={`/editBooking/${user.id}`}>Update</Link>
         <button className='btn btn-danger mx-2' onClick={()=>deleteUser(user.id)}>Delete</button>
       </td>

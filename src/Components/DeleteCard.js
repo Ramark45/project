@@ -74,7 +74,7 @@ const DeleteCard = () => {
       <div className="card-body">
         <h5 className="card-title">{user.name}</h5>
         <p className="card-text">{user.description}</p>
-        <button style={{backgroundColor:'#24a4d8',color:'white',borderRadius:5,width:120,height:40,borderColor:'rgb(34, 37, 57)',border:'none',fontSize:15,fontWeight:'bold'}}
+        <button className='btn btn-danger mx-2'
 
         onClick={() => deleteUser(user.id)}>Delete</button>
       </div>
