@@ -1,24 +1,15 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
-import UserService from "../Services/user-service";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import authHeader from "../Services/auth-header";
 const AdminBoard = () => {
-  const [content, setContent] = useState("");
-
   let navigate = useNavigate();
-  const [users,setUsers]=useState([]);
-
-    const {id}=useParams();
-
   const [user, setUser] = useState({
     name: "",
     description: "",
     image: "",
   });
 
-  const { name, description, image } = user;
+  const { name, description } = user;
 
   const onInputChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -37,32 +28,10 @@ const AdminBoard = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log(user.description);
-    console.log(user.name);
-    console.log(user.image);
-
      await axios.post("http://localhost:8080/api/test/image",user);
      alert("Image Added Succesfully")
      navigate("/")
    };
-
-  useEffect(() => {
-    UserService.getAdminBoard().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          (error.message) ||
-          (error.toString());
-
-        setContent(_content);
-    }
-    );
-  }, []);
 
   return (
     <div className="container" >
@@ -110,7 +79,6 @@ const AdminBoard = () => {
                 className="form-control"
                 placeholder="Choose Image"
                 name="image"
-                // value={image}
                 accept="image/*"
                 onChange={(e) => PreviewImage(e)}
               />

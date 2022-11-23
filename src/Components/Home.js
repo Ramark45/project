@@ -1,14 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
-import {useParams } from 'react-router-dom';
-import UserService from "../Services/user-service";
-import wedding2 from '../Components/wedding2.jpg';
-import wedding3 from '../Components/wedding3.jpg';
-import wedding4 from '../Components/wedding4.jpg';
-import nature1 from '../Components/nature1.jpg';
-import nature2 from '../Components/nature2.jpg';
-import nature3 from '../Components/nature3.jpg';
-import {useNavigate } from "react-router-dom";
 const Home = () => {
   
   const [users,setUsers]=useState([
@@ -18,9 +9,6 @@ const Home = () => {
       image:""
     }
   ]);
-  
-
-  const {id}=useParams();
   useEffect(() => {
     AllUsers();
   }, []);
@@ -30,28 +18,7 @@ const Home = () => {
        setUsers(response.data);
        console.log(response);
    })}
-
-  const [content, setContent] = useState("");
-  const navigate = useNavigate();
   
-  function Booking(){
-    navigate('/Booking')
-  }
-  useEffect(() => {
-    UserService.getPublicContent().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||error.message ||
-          error.toString();
-
-        setContent(_content);
-      }
-    );
-  }, []);
-
   return (
       <>
       <h3 style={{"fontFamily":"times new roman","textAlign":"center","color":"#24a4d8","fontWeight":"bold"}}>
@@ -59,7 +26,7 @@ const Home = () => {
       </h3>
       <div className="row row-cols-1 row-cols-md-3 g-4">
   {
-  users.map((user,index)=>{
+  users.map((user)=>{
     return(
     <div className="col">
     <div className="card">

@@ -1,11 +1,10 @@
 
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link,useNavigate,useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthService from "../Services/auth-service";
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser();
-  const {id}=useParams();
   const [users,setUsers]=useState([
       {
         firstName : "",
@@ -51,15 +50,14 @@ const Profile = () => {
     </tr>
   </thead>
   <tbody>
-      {users.map((user,index)=>{
+      {users.map((user)=>{
         console.log(user.firstName)
         console.log(currentUser.username)
-        if(user.firstName==currentUser.username){
+        if(user.firstName===currentUser.username){
           return(
             <>
             
             <tr>
-                {/* <th scope="row" key={index}>{index+1}</th> */}
                 <td style={{"textTransform":"uppercase"}}>{user.firstName}</td>
                 <td>{user.address}</td>
                 <td>{user.type}</td>

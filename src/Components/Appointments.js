@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { Link,useNavigate,useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 export default function Appointments() {
-  const navigate=useNavigate()
     const [users,setUsers]=useState([
       {
         firstName : "",
@@ -20,8 +19,6 @@ export default function Appointments() {
       AllUsers();
 
     }, []);
-
-    const {id}=useParams();
     
     const AllUsers = async () => {
       axios.get(`http://localhost:8080/api/test/booking`).then((response)=>{

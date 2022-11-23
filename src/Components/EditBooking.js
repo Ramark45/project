@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import {useNavigate, useParams } from "react-router-dom";
 
 export default function EditBooking() {
   let navigate = useNavigate();
@@ -59,7 +59,7 @@ export default function EditBooking() {
                 <div className="row">
                   <div className="col-md-6 mb-4">
                     <div className="form-outline">
-                      <input type="text" name="firstName" value={firstName} onChange={(e) => onInputChange(e)} id="form3Example1m" class="form-control form-control-lg" placeholder="First name" />
+                      <input type="text" name="firstName" value={firstName}  id="form3Example1m" class="form-control form-control-lg" placeholder="First name" />
             
                     </div>
                   </div>

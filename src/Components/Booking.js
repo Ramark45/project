@@ -1,7 +1,7 @@
 import "../App.css";
 import axios from "axios";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import cameraman from './cameraman.jpg';
 import AuthService from "../Services/auth-service";
  const Booking=()=>{
@@ -57,7 +57,7 @@ import AuthService from "../Services/auth-service";
         <div className="card card-registration my-4">
           <div className="row g-0">
             <div className="col-xl-6 d-none d-xl-block">
-              <img src={cameraman}
+              <img src={cameraman} alt="cameraman"
                 className="img-fluid"
                 style={{"border-top-left-radius": ".25rem","border-bottom-left-radius": ".25rem","height":"540px","width":"500px"}} />
             </div>

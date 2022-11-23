@@ -9,19 +9,14 @@ import EditBooking from "./Components/EditBooking"
 import AuthService from "./Services/auth-service";
 import Appointments from "./Components/Appointments";
 import Login from "./Components/Login";
-//import Register from "./components/Register";
 import Home from "./Components/Home";
 import Profile from "./Components/Profile";
-import BoardUser from "./Components/BoardUser";
-//import BoardModerator from "./components/BoardModerator";
 import AdminBoard from "./Components/AdminBoard";
 import DeleteCard from "./Components/DeleteCard";
 import Signup from "./Components/Signup";
 import Payment from "./Components/Payment";
 import Protected from "./Components/Protected";
-import homeicon from './Components/homeicon.jpg'
 const App = () => {
-  const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
   const [getUserBoard, setUserBoard] = useState(false);
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -31,7 +26,6 @@ const App = () => {
 
     if (user) {
       setCurrentUser(user);
-      setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(user.roles.includes("ROLE_ADMIN"));
       setUserBoard(user.roles.includes("ROLE_USER"));
     }
@@ -43,7 +37,7 @@ const App = () => {
   return (
     <div>
       <nav className="navbar navbar-expand navbar-dark" style={{"backgroundColor":"#24a4d8","height":"70px"}}>
-        <img src={logo} style={{"height":"70px","width":"120px","paddingLeft":"10px"}}/>
+        <img src={logo} style={{"height":"70px","width":"120px","paddingLeft":"10px"}} alt="logo"/>
         <div className="navbar-nav mr-auto">
         
           <li className="nav-item" >
@@ -91,10 +85,10 @@ const App = () => {
           )} 
           </div>
           
-        {currentUser ? (
+        {currentUser ? (<>
           <div className="navbar-nav ml-auto">
             
-            <li className="nav-item">
+            <li className="nav-item" style={{"marginLeft":"600px"}}>
               <a href="/login" className="nav-link" onClick={logOut}>
               LOGOUT <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
@@ -104,7 +98,7 @@ const App = () => {
             </li>
 
           </div>
-        
+        </>
         ) : (
           <div className="navbar-nav ml-auto">
             <li className="nav-item">

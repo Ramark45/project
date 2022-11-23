@@ -30,6 +30,7 @@ export default function Payment() {
                 <img
                   className="img-fluid"
                   src="https://img.icons8.com/color/48/000000/mastercard-logo.png"
+                  alt="atm1"
                 />
                 <div className="flex-fill mx-3">
                   <div className="form-outline">
@@ -48,6 +49,7 @@ export default function Payment() {
                 <img
                   className="img-fluid"
                   src="https://img.icons8.com/color/48/000000/visa.png"
+                  alt="atm2"
                 />
                 <div className="flex-fill mx-3">
                   <div className="form-outline">
